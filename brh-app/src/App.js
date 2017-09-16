@@ -6,7 +6,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      imageURL: "",
+      imageURL: '',
       top: 0,
       left: 0,
       width: 0,
@@ -37,6 +37,7 @@ class App extends Component {
         return response.json();
       }).then(response => {
         console.log(response);
+        
       })
   }
 
@@ -44,7 +45,6 @@ class App extends Component {
     this.setState({
       imageURL: event.target.value
     })
-    this.makeCall(this.state.imageURL)
   }
 
   render() {
@@ -57,12 +57,13 @@ class App extends Component {
               <form>
                 <input type="text" value={this.state.imageURL} onChange={this.setImageURL}/>
               </form>
+              <button type="button" value="Submit" onClick={this.makeCall(this.state.imageURL)}></button>
           </div>
           </div>
 
           <div className="row">
             <div className="col-md-6 rendered-image-wrapper">
-              <img src={this.state.imageURL} alt="img" className="rendered-image"></img>
+              <img src={this.state.imageURL} alt="" className="rendered-image"></img>
             </div>
 
             <div>
