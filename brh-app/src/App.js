@@ -6,16 +6,45 @@ class App extends Component {
     super(props);
 
     this.state = {
-      imageURL: ""
+      imageURL: "",
+      top: 0,
+      left: 0,
+      width: 0,
+      height: 0
     }
 
     this.setImageURL = this.setImageURL.bind(this);
+  }
+
+  makeCall(url) {
+    const detectURL = 'https://eastus2.api.cognitive.microsoft.com/face/v1.0/identify?returnFaceLandmarks=true';
+
+    const body = {
+      url: url
+    }
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Ocp-Apim-Subscription-Key': '5e8e4a107812423299b6b06f0d209e9a'
+      },
+      body: JSON.stringify(body)
+    }
+
+    fetch(detectURL, options)
+      .then(response => {
+        return response.json();
+      }).then(response => {
+        console.log(response);
+      })
   }
 
   setImageURL(event) {
     this.setState({
       imageURL: event.target.value
     })
+    this.makeCall(this.state.imageURL)
   }
 
   render() {
