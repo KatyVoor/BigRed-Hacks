@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   makeCall(url) {
-    const detectURL = 'https://eastus2.api.cognitive.microsoft.com/face/v1.0/identify?returnFaceLandmarks=true';
+    const detectURL = 'https://eastus2.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceLandmarks=true';
 
     const body = {
       url: url
