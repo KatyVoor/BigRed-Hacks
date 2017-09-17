@@ -80,3 +80,8 @@ input {
   height: 350px;
   max-width: 100%;
 }
+
+.canvas {
+  display: block;
+  margin: auto;
+}

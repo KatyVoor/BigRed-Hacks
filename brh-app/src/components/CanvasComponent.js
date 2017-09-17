@@ -58,7 +58,7 @@ import React from 'react';
 
   render() {
     return (
-      <canvas ref="canvas" width="500" height="300" />
+      <canvas ref="canvas" width="500" height="300" className="canvas"/>
     )
   }
 }
