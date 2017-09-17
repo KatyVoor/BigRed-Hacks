@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DrawLines from './components/DrawLines.js';
 import './main.css';
 
 class App extends Component {
@@ -7,13 +8,15 @@ class App extends Component {
 
     this.state = {
       imageURL: '',
-      top: 0,
-      left: 0,
-      width: 0,
-      height: 0
+      rectangleTop: 0,
+      rectangleLeft: 0,
+      eyeLeftTopY: 0,
+      eyeRightTopY: 0,
+      noseTipY: 0
     }
 
     this.setImageURL = this.setImageURL.bind(this);
+    this.makeCall= this.makeCall.bind(this);
   }
 
   makeCall(url) {
@@ -36,10 +39,16 @@ class App extends Component {
       .then(response => {
         return response.json();
       }).then(response => {
-        console.log(response);
-        // this.setState({
-        //   top:
-        // })
+        if (response) {
+          console.log(response[0]);
+          this.setState({
+            rectangleTop: response[0].faceRectangle.top,
+            rectangleLeft: response[0].faceRectangle.left,
+            eyeRightTopY:response[0].faceLandmarks.eyeLeftTop.y,
+            eyeLeftTopY:response[0].faceLandmarks.eyeLeftRight.y,
+            noseTipY:response[0].faceLandmarks.noseTip.y
+          })
+        }
       })
   }
 
@@ -59,7 +68,7 @@ class App extends Component {
               <form>
                 <input type="text" value={this.state.imageURL} onChange={this.setImageURL}/>
               </form>
-              <button type="button" value="Submit" onClick={this.makeCall(this.state.imageURL)}></button>
+              <button type="button" value="Submit" onClick={() => this.makeCall(this.state.imageURL)} className="form-button">Submit</button>
           </div>
           </div>
 

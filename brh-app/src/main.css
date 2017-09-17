@@ -44,6 +44,10 @@ input {
   border-radius: 5px;
 }
 
+.form-button {
+  padding: 10px;
+}
+
 .rendered-image-wrapper {
   margin-top: 35px;
   margin-left: 25px;
