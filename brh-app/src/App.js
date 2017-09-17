@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import DrawLines from './components/DrawLines.js';
+import CanvasComponent from './components/DrawLines.js';
 import './main.css';
+import logo from './resources/brh-app-logo.svg';
 
 class App extends Component {
   constructor(props) {
@@ -8,11 +9,13 @@ class App extends Component {
 
     this.state = {
       imageURL: '',
-      rectangleTop: 0,
-      rectangleLeft: 0,
-      eyeLeftTopY: 0,
-      eyeRightTopY: 0,
-      noseTipY: 0
+      points: {
+        rectangleTop: 0,
+        rectangleLeft: 0,
+        eyeLeftTopY: 0,
+        eyeRightTopY: 0,
+        noseTipY: 0
+      }
     }
 
     this.setImageURL = this.setImageURL.bind(this);
@@ -39,16 +42,16 @@ class App extends Component {
       .then(response => {
         return response.json();
       }).then(response => {
-        if (response) {
           console.log(response[0]);
           this.setState({
-            rectangleTop: response[0].faceRectangle.top,
-            rectangleLeft: response[0].faceRectangle.left,
-            eyeRightTopY:response[0].faceLandmarks.eyeLeftTop.y,
-            eyeLeftTopY:response[0].faceLandmarks.eyeLeftRight.y,
-            noseTipY:response[0].faceLandmarks.noseTip.y
-          })
-        }
+            points: {
+              rectangleTop: response[0].faceRectangle.top,
+              rectangleLeft: response[0].faceRectangle.left,
+              eyeRightTopY: response[0].faceLandmarks.eyeRightTop.y,
+              eyeLeftTopY: response[0].faceLandmarks.eyeLeftTop.y,
+              noseTipY: response[0].faceLandmarks.noseTip.y
+            }
+          });
       })
   }
 
@@ -68,18 +71,21 @@ class App extends Component {
               <form>
                 <input type="text" value={this.state.imageURL} onChange={this.setImageURL}/>
               </form>
-              <button type="button" value="Submit" onClick={() => this.makeCall(this.state.imageURL)} className="form-button">Submit</button>
+              <button type="button" value="Submit" onClick={() => this.makeCall(this.state.imageURL)} className="form-button">SUBMIT</button>
           </div>
           </div>
 
-          <div className="row">
+          <div className="row body-wrapper">
+            <div className="col-md-6 logo-wrapper">
+              <img src={logo} alt="logo" className="logo"></img>
+            </div>
             <div className="col-md-6 rendered-image-wrapper">
               <img src={this.state.imageURL} alt="" className="rendered-image"></img>
             </div>
 
-            <div>
-
-            </div>
+            {/* <div className="col-md-6 draw-lines-wrapper">
+              <CanvasComponent points={this.state.points}></CanvasComponent>
+            </div> */}
           </div>
         </div>
       </div>
