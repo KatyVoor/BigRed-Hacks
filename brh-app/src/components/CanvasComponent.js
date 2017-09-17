@@ -1,7 +1,9 @@
 import React from 'react';
 
-class CanvasComponent extends React.Component {
-    drawLines = ({points}, c) => {
+
+
+  class CanvasComponent extends React.Component {
+    drawLines({points}, c) {
       console.log('in draw lines', points, c)
       const { rectangleWidth, rectangleLeft, eyeLeftTopY, eyeRightTopY, noseTipY } = points;
     	var minorAxis = rectangleWidth / 2;

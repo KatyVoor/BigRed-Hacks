@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CanvasComponent from './components/DrawLines.js';
+import CanvasComponent from './components/CanvasComponent.js';
 import './main.css';
 import logo from './resources/brh-app-logo.svg';
 
@@ -76,16 +76,16 @@ class App extends Component {
           </div>
 
           <div className="row body-wrapper">
-            <div className="col-md-6 logo-wrapper">
+            {/* <div className="col-md-6 logo-wrapper">
               <img src={logo} alt="logo" className="logo"></img>
-            </div>
+            </div> */}
             <div className="col-md-6 rendered-image-wrapper">
               <img src={this.state.imageURL} alt="" className="rendered-image"></img>
             </div>
 
-            {/* <div className="col-md-6 draw-lines-wrapper">
-              <CanvasComponent points={this.state.points}></CanvasComponent>
-            </div> */}
+            <div className="col-md-6 draw-lines-wrapper">
+              <CanvasComponent points={this.state.points} />
+            </div>
           </div>
         </div>
       </div>
